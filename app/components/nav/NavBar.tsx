@@ -25,7 +25,7 @@ const NavBar = () => {
                     gap-3
                     md:gap-0
                     ">
-                        <Link href="/" className={`${reddressed.className} font-bold text-2xl`} >E-shop</Link>
+                        <Link href="/" className={`${reddressed.className} font-bold text-2xl`} >ElectroTienda</Link>
                         <div className="hidden md:block">Search</div>
                         <div className="flex items-center gap-8 md:gap-12">
                             <div>CartCount</div>
