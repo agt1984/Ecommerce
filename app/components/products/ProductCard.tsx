@@ -4,6 +4,7 @@ import { formatPrice } from "@/utils/formatPrice";
 import { truncateText } from "@/utils/truncateText";
 import { Rating } from "@mui/material";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface ProductCardProps{
     data: any
@@ -11,12 +12,14 @@ interface ProductCardProps{
 
 
 const ProductCard:React.FC<ProductCardProps> = ({data}) => {
+    const router = useRouter();//le digo que use el enrutador entre paginas
 
-     const productRating =
-       data.reviews.reduce((acc:number, item:any) => item.rating + acc, 0) / data.reviews.length;
+    const productRating =
+      data.reviews.reduce((acc:number, item:any) => item.rating + acc, 0) / data.reviews.length;
 
     return (
       <div
+        onClick={() => router.push(`/product/${data.id}`)} //le agrego el evento onclick para que viaje entre las paginas de producto
         className="col-span-1 
         cursor-pointer 
         border-[1.2px]
