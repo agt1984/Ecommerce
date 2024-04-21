@@ -6,6 +6,8 @@ interface ProductDetailsProps{
     product: any
 }
 
+
+
 //mira como se hace un componente de facil
 const Horizontal = () => {
     return <hr className="w-[30%] my-2]"/>
@@ -38,8 +40,15 @@ const productRating =
           <div>
             <span className="font-semibold">BRAND:</span> {product.brand}
           </div>
-          <div className={product.isStock ? "text-rose-400" : "text-teal-400"}>{product.inStock ? "In stock" : "Out of stock"}
+          <div className={product.isStock ? "text-rose-400" : "text-teal-400"}>
+            {product.inStock ? "In stock" : "Out of stock"}
           </div>
+          <Horizontal />
+          <div>color</div>
+          <Horizontal />
+          <div>quantity</div>
+          <Horizontal />
+          <div>add to cart</div>
         </div>
       </div>
     );
