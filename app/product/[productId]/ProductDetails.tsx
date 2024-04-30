@@ -1,4 +1,5 @@
 'use client';
+import React, { useState } from 'react';
 
 import { Rating } from "@mui/material";
 
@@ -6,6 +7,22 @@ interface ProductDetailsProps{
     product: any
 }
 
+export type CartProductType = {
+  id: string,
+  name: string,
+  description: string,
+  category: string,
+  brand: string,
+  selectedImg: SelectedImgType,
+  quantity: number,
+  price: number
+}
+
+export type SelectedImgType = {
+  color: string,
+  colorCode: string,
+  image: string
+}
 
 
 //mira como se hace un componente de facil
@@ -15,6 +32,17 @@ const Horizontal = () => {
 
 
 const ProductDetails:React.FC<ProductDetailsProps> = ({ product }) => {
+
+const [cartProduct, setCartProduct] = useState<CartProductType>({
+  id: product.id,
+  name: product.name,
+  description: product.description,
+  category: product.category,
+  brand: product.brand,
+  selectedImg: { ...product.images[0] },
+  quantity: 1,
+  price: product.price,
+});
 
 const productRating =
   product.reviews.reduce((acc: number, item: any) => item.rating + acc, 0) /
