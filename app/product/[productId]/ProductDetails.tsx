@@ -3,6 +3,7 @@ import React, { useCallback, useState } from 'react';
 
 import { Rating } from "@mui/material";
 import SetColor from '@/app/components/products/SetColor';
+import SetQuantity from '@/app/components/products/SetQuantity';
 
 interface ProductDetailsProps{
     product: any
@@ -49,11 +50,41 @@ const productRating =
   product.reviews.reduce((acc: number, item: any) => item.rating + acc, 0) /
   product.reviews.length;
 
-  const handleColorSelect = useCallback((value: SelectedImgType) => {
-    setCartProduct((prev) => {
-      return {...prev, selectedImg: value}
-    })
-  }, [cartProduct.selectedImg])
+const handleColorSelect = useCallback((value: SelectedImgType) => {
+  setCartProduct((prev) => {
+    return {...prev, selectedImg: value}
+  })
+}, [cartProduct.selectedImg])
+
+const handleQtyIncrease = useCallback(() => {
+  /*
+  setCartProduct((prev) => {
+    return { ...prev, quantity: ++prev.quantity };
+  });
+  */
+  if (cartProduct.quantity === 99) {
+    return;
+  }
+  //esta forma funcina mejor
+  setCartProduct((prev) => {
+    return { ...prev, quantity: prev.quantity + 1 };
+  });
+}, [cartProduct]);
+
+const handleQtyDecrease = useCallback(() => {
+  /*
+  setCartProduct((prev) => {
+    return { ...prev, quantity: --prev.quantity };
+  });
+  */
+  if (cartProduct.quantity === 1) {
+    return;
+  }
+  //esta forma funciona mejor
+  setCartProduct((prev) => {
+    return { ...prev, quantity: prev.quantity - 1 };
+  });
+}, [cartProduct]);
 
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -80,12 +111,16 @@ const productRating =
           </div>
           <Horizontal />
           <SetColor
-          cartProduct={cartProduct}
-          images={product.images}
-          handleColorSelect={handleColorSelect}
+            cartProduct={cartProduct}
+            images={product.images}
+            handleColorSelect={handleColorSelect}
           />
           <Horizontal />
-          <div>quantity</div>
+          <SetQuantity
+            cartProduct={cartProduct}
+            handleQtyIncrease={handleQtyIncrease}
+            handleQtyDecrease={handleQtyDecrease}
+          />
           <Horizontal />
           <div>add to cart</div>
         </div>
