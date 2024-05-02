@@ -50,7 +50,9 @@ const productRating =
   product.reviews.length;
 
   const handleColorSelect = useCallback((value: SelectedImgType) => {
-    
+    setCartProduct((prev) => {
+      return {...prev, selectedImg: value}
+    })
   }, [cartProduct.selectedImg])
 
     return (
