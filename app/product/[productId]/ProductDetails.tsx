@@ -6,6 +6,7 @@ import SetColor from '@/app/components/products/SetColor';
 import SetQuantity from '@/app/components/products/SetQuantity';
 import Button from '@/app/components/Button';
 import ProductImage from '@/app/components/products/ProductImage';
+import { useCart } from '@/hooks/useCart';
 
 interface ProductDetailsProps{
     product: any
@@ -36,7 +37,7 @@ const Horizontal = () => {
 
 
 const ProductDetails:React.FC<ProductDetailsProps> = ({ product }) => {
-
+const {cartTotalQty} = useCart()
 const [cartProduct, setCartProduct] = useState<CartProductType>({
   id: product.id,
   name: product.name,
@@ -47,6 +48,8 @@ const [cartProduct, setCartProduct] = useState<CartProductType>({
   quantity: 1,
   price: product.price,
 });
+
+console.log(cartTotalQty);//para prueba del use context del carrito
 
 const productRating =
   product.reviews.reduce((acc: number, item: any) => item.rating + acc, 0) /

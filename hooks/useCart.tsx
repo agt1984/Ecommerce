@@ -1,3 +1,4 @@
+//Este es el use context para el carrito, es un hook
 import { createContext, useContext, useState } from "react";
 
 type CartContextType = {
