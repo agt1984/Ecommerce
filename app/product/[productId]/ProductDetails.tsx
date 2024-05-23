@@ -37,7 +37,7 @@ const Horizontal = () => {
 
 
 const ProductDetails:React.FC<ProductDetailsProps> = ({ product }) => {
-const {cartTotalQty} = useCart()
+const {handleAddProductToCart, cartProducts} = useCart()
 const [cartProduct, setCartProduct] = useState<CartProductType>({
   id: product.id,
   name: product.name,
@@ -49,7 +49,7 @@ const [cartProduct, setCartProduct] = useState<CartProductType>({
   price: product.price,
 });
 
-console.log(cartTotalQty);//para prueba del use context del carrito
+console.log(cartProducts)
 
 const productRating =
   product.reviews.reduce((acc: number, item: any) => item.rating + acc, 0) /
@@ -134,7 +134,7 @@ const handleQtyDecrease = useCallback(() => {
           <div className='max-w-[300px]'>
             <Button
             label="Add to Cart"
-            onClick={() => {}}
+            onClick={() => handleAddProductToCart(cartProduct)}
             />
           </div>
         </div>

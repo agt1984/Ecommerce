@@ -24,14 +24,14 @@ export const CartContextProvider = (props: Props) => {
             let updatedCart;
 
             if(prev){
-                updatedCart = [...prev, product]
+                updatedCart = [...prev, product];
             }else{
-                updatedCart = [product]
+                updatedCart = [product];
             }
 
             return updatedCart;
-        })
-    }, [])
+        });
+    }, []);
 
     const value = {
       cartTotalQty,
