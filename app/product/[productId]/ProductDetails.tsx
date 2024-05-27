@@ -8,6 +8,7 @@ import Button from '@/app/components/Button';
 import ProductImage from '@/app/components/products/ProductImage';
 import { useCart } from '@/hooks/useCart';
 import { MdCheckCircle } from 'react-icons/md';
+import { useRouter } from 'next/navigation';
 
 interface ProductDetailsProps{
     product: any
@@ -38,18 +39,19 @@ const Horizontal = () => {
 
 
 const ProductDetails:React.FC<ProductDetailsProps> = ({ product }) => {
-const {handleAddProductToCart, cartProducts} = useCart();
-const [isProductInCart, setIsProductInCart] = useState(false);
-const [cartProduct, setCartProduct] = useState<CartProductType>({
-  id: product.id,
-  name: product.name,
-  description: product.description,
-  category: product.category,
-  brand: product.brand,
-  selectedImg: { ...product.images[0] },
-  quantity: 1,
-  price: product.price,
+  const {handleAddProductToCart, cartProducts} = useCart();
+  const [isProductInCart, setIsProductInCart] = useState(false);
+  const [cartProduct, setCartProduct] = useState<CartProductType>({
+    id: product.id,
+    name: product.name,
+    description: product.description,
+    category: product.category,
+    brand: product.brand,
+    selectedImg: { ...product.images[0] },
+    quantity: 1,
+    price: product.price,
 });
+const router = useRouter();
 
 console.log(cartProducts);
 
@@ -135,10 +137,19 @@ const handleQtyDecrease = useCallback(() => {
           <Horizontal />
           {isProductInCart ? (
             <>
-            <p className='mb-2 text-slate-500 flex items-center gap-1'>
-              <MdCheckCircle className='text-teal-400' size={20}/>
-              <span>Product added to cart</span>
-            </p>
+              <p className="mb-2 text-slate-500 flex items-center gap-1">
+                <MdCheckCircle className="text-teal-400" size={20} />
+                <span>Product added to cart</span>
+              </p>
+              <div className="max-w-[300px]">
+                <Button
+                  label="View Cart"
+                  outline
+                  onClick={() => {
+                    router.push("/cart");
+                  }}
+                />
+              </div>
             </>
           ) : (
             <>
